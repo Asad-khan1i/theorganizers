@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tags Input Example</title>
+  <style>
+    #tags-container {
+      border: 1px solid #ccc;
+      padding: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      width: 300px;
+    }
+
+    .tag {
+      background-color: #f0f0f0;
+      color: #333;
+      padding: 5px 12px 5px 2px;
+      margin: 5px;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .tag-remove {
+      position: absolute;
+      top: 20%;
+      right: 3px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-weight: bold;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="tags-container">
+    <input type="text" id="tags-input" placeholder="Type and press Enter to add tags">
+  </div>
+
+  <script>
+    const tagsContainer = document.getElementById('tags-container');
+    const tagsInput = document.getElementById('tags-input');
+
+    // Function to create a new tag
+    function createTag(tagText) {
+      const tagElement = document.createElement('div');
+      tagElement.className = 'tag';
+      tagElement.textContent = tagText;
+
+      const removeButton = document.createElement('span');
+      removeButton.className = 'tag-remove';
+      removeButton.textContent = 'x';
+
+      // Event listener for tag removal
+      removeButton.addEventListener('click', function () {
+        tagsContainer.removeChild(tagElement);
+      });
+
+      tagElement.appendChild(removeButton);
+      tagsContainer.appendChild(tagElement);
+    }
+
+    // Event listener to handle user input
+    tagsInput.addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        const tagText = tagsInput.value.trim();
+        if (tagText !== '') {
+          createTag(tagText);
+          tagsInput.value = '';
+        }
+      }
+    });
+
+    
+
+
+  </script>
+</body>
+</html>
